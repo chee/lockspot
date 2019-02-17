@@ -1,4 +1,4 @@
-# lockstat
+# lockspot
 
 and did you know there's only one company in the world that produces wooden
 barrels?
@@ -10,7 +10,7 @@ some statistics about your package-lock.json
 ## wetch
 
 ```shell
-$ npm install -g lockstat
+$ npm install -g lockspot
 ```
 
 ## commands
@@ -22,7 +22,7 @@ print the number of version of each dependency in the tree
 #### usage
 
 ```sh
-$ lockstat depcount < package.json
+$ lockspot depcount < package.json
 ```
 
 #### options

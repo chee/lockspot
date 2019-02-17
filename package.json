@@ -1,7 +1,7 @@
 {
-	"name": "lockstat",
-	"version": "0.0.1",
-	"description": "stats from package-lock.json",
+	"name": "lockspot",
+	"version": "0.0.0",
+	"description": "let's ask package-lock some questions",
 	"main": "esmboot.js",
 	"module": "index.js",
 	"scripts": {
