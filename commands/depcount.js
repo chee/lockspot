@@ -1,6 +1,6 @@
 import {EOL} from "os"
-import getLockfile from "../util/get-lockfile"
-import recurseDependencies from "../util/recurse-dependencies"
+import getLockfile from "../functions/get-lockfile"
+import recurseDependencies from "../functions/recurse-dependencies"
 
 export let command = "depcount"
 export let describe = "the number of versions of each dependency"
