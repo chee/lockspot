@@ -1,6 +1,7 @@
 import {EOL} from "os"
 import getLockfile from "../functions/get-lockfile"
-import recurseDependencies from "../functions/recurse-dependencies"
+import countDependencies from "../functions/recursors/count-dependencies"
+import getLongestName from "../functions/recursors/get-longest-name"
 
 export let command = "depcount"
 export let describe = "the number of versions of each dependency"
@@ -37,24 +38,15 @@ let sorts = {
 export async function handler (argv) {
 	let lockfile = await getLockfile(argv)
 
-	let counts = {}
-	let maxNameLength = 0
-
-	await recurseDependencies(async (name, info) => {
-		maxNameLength = name.length > maxNameLength
-			? name.length
-			: maxNameLength
-
-		counts[name] = (counts[name] || 0) + 1
-
-	}, lockfile.dependencies)
+	let counts = await countDependencies()(lockfile.dependencies)
+	let longestName = await getLongestName()(lockfile.dependencies)
 
 	Object.entries(counts)
 		.sort(sorts[argv.sort])
 		.filter(([, count]) => count >= argv.min)
 		.forEach(([name, count]) => {
 			process.stdout.write(
-				name.padEnd(maxNameLength, " ") + "\t" + count + EOL
+				name.padEnd(longestName.length, " ") + "\t" + count + EOL
 			)
 	})
 }
