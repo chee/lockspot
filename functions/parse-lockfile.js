@@ -1,13 +1,13 @@
 import validateLockfile from "./validate-lockfile"
 
 let errors = {
-	parsing (error) {
+	parsing () {
 		console.error("Error parsing the input, make sure it's a json file!")
 		console.error("You can pass the file as STDIN or using the --file argument")
 		process.exit(2)
 	},
 	invalid () {
-		console.error("Input doesn't appear to be a valid lockfile")
+		console.error("Input doesn't appear to be a valid lockfile@1")
 		console.error("Make sure you've made it with a recent version of npm")
 		process.exit(3)
 	}
