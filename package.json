@@ -1,0 +1,23 @@
+{
+	"name": "lockstat",
+	"version": "0.0.0",
+	"description": "",
+	"main": "esmboot.js",
+	"module": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"bin": "esmboot.js",
+	"keywords": [],
+	"author": "chee <chee@snoot.club>",
+	"license": "GPL-3.0+",
+	"files": [
+		"commands/",
+		"util/",
+		"index.js"
+	],
+	"dependencies": {
+		"esm": "^3.2.5",
+		"yargs": "^13.2.0"
+	}
+}
