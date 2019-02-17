@@ -13,7 +13,7 @@
 	"license": "GPL-3.0+",
 	"files": [
 		"commands/",
-		"util/",
+		"functions/",
 		"index.js"
 	],
 	"dependencies": {
