@@ -26,7 +26,7 @@ action "tag-only filter" {
 action "Set version" {
   uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
   needs = ["tag-only filter"]
-  args = "--no-git-tag-version version from-git"
+  args = "run set-version"
 }
 
 action "Publish" {
