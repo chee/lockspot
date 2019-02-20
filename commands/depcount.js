@@ -1,6 +1,6 @@
 import {EOL} from "os"
 import getLockfile from "../functions/get-lockfile"
-import countDependencies from "../functions/recursors/count-dependencies"
+import gatherDependencyVersions from "../functions/recursors/gather-dependency-versions"
 import getLongestName from "../functions/recursors/get-longest-name"
 
 export let command = "depcount"
@@ -31,19 +31,29 @@ export let builder = yargs => {
 }
 
 let sorts = {
+	dont: Function.prototype,
 	count: ([, a], [, b]) => b - a,
 	name: ([a, ], [b, ]) => a.localeCompare(b)
 }
 
+let countVersions = ([name, versions]) => [
+	name,
+	versions.length
+]
+
+let minFilter = min => ([, count]) =>
+	count >= min
+
 export async function handler (argv) {
 	let lockfile = await getLockfile(argv)
 
-	let counts = await countDependencies()(lockfile.dependencies)
+	let versions = await gatherDependencyVersions()(lockfile.dependencies)
 	let longestName = await getLongestName()(lockfile.dependencies)
 
-	Object.entries(counts)
+	Object.entries(versions)
+		.map(countVersions)
 		.sort(sorts[argv.sort])
-		.filter(([, count]) => count >= argv.min)
+		.filter(minFilter(argv.min))
 		.forEach(([name, count]) => {
 			process.stdout.write(
 				name.padEnd(longestName.length, " ") + "\t" + count + EOL
