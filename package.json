@@ -1,6 +1,6 @@
 {
 	"name": "lockspot",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "let's ask package-lock some questions",
 	"main": "esmboot.js",
 	"module": "index.js",
