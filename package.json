@@ -5,7 +5,6 @@
 	"main": "esmboot.js",
 	"module": "index.js",
 	"scripts": {
-		"set-version": "git stash && npm --no-git-tag-version version ${GITHUB_REF##refs/tags/v}",
 		"test": "mocha -r esm --recursive tests"
 	},
 	"bin": "esmboot.js",
