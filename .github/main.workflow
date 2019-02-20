@@ -1,6 +1,8 @@
 workflow "npm test" {
   on = "push"
-  resolves = ["Publish"]
+  resolves = [
+    "Publish"
+  ]
 }
 
 action "Install dependencies" {
@@ -21,8 +23,14 @@ action "tag-only filter" {
   args = "tag"
 }
 
+action "Set version" {
+  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+  needs = ["tag-only filter"]
+  args = "--no-git-tag-version version from-git"
+}
+
 action "Publish" {
-  needs = "tag-only filter"
+  needs = "Set version"
   uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
   args = "publish --access public"
   secrets = ["NPM_AUTH_TOKEN"]
