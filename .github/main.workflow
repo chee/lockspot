@@ -1,6 +1,6 @@
 workflow "npm test" {
   on = "push"
-  resolves = ["Run tests"]
+  resolves = ["Publish"]
 }
 
 action "Install dependencies" {
