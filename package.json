@@ -5,7 +5,7 @@
 	"main": "esmboot.js",
 	"module": "index.js",
 	"scripts": {
-		"set-version":"node -e \"pkg = require('./package.json'); pkg.version = '$(git tag | sort -V | tail -1 | grep -Eo '\\d+\\.\\d+\\.\\d+')'; fs.writeFile('package.json', JSON.stringify(pkg), () => console.log(pkg.version))\"",
+		"set-version": "git stash && npm --no-git-tag-version version from-git",
 		"test": "mocha -r esm --recursive tests"
 	},
 	"bin": "esmboot.js",
