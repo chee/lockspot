@@ -5,6 +5,7 @@
 	"main": "esmboot.js",
 	"module": "index.js",
 	"scripts": {
+		"set-version":"node -e \"pkg = require('./package.json'); pkg.version = '$(echo $GITHUB_REF | grep -Eo '\\d+\\.\\d+\\.\\d+')'; fs.writeFile('package.json', JSON.stringify(pkg), Function.prototype)\"",
 		"test": "mocha -r esm --recursive tests"
 	},
 	"bin": "esmboot.js",
