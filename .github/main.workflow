@@ -16,7 +16,7 @@ action "Run tests" {
 
 # Filter for a new tag
 action "tag-only filter" {
-  needs = "Test"
+  needs = "Run tests"
   uses = "actions/bin/filter@master"
   args = "tag"
 }
