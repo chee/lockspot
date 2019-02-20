@@ -24,14 +24,9 @@ action "tag-only filter" {
 }
 
 action "Set version" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+  uses = "chee/actions@master"
   needs = ["tag-only filter"]
-  args = "run set-version"
-  env = {
-    EMAIL = "chee-github-action@snoot.club"
-    GIT_AUTHOR_NAME = "github"
-    GIT_COMMITTER_NAME = "github"
-  }
+  args = "set-package.json-version-from-github-ref"
 }
 
 action "Publish" {
