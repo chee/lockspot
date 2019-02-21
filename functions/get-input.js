@@ -3,16 +3,16 @@ import path from "path"
 import fs from "fs"
 import {promisify} from "util"
 
-async function checkPathIsRegularFile (path) {
+async function checkPathIsReadableFile (path) {
 	return promisify(fs.stat)(path)
-		.then(stats => stats.isFile())
+		.then(stats => stats.isFile() || stats.isFIFO())
 		.catch(() => false)
 }
 
 async function getStream ({file, isTTY}) {
 	if (file != null && file != "-") {
 		let filepath = path.resolve(file)
-		if (!await checkPathIsRegularFile(filepath)) {
+		if (!await checkPathIsReadableFile(filepath)) {
 			throw new Error(`not a file: "${filepath}"`)
 		}
 		return createReadStream(filepath)
@@ -20,7 +20,7 @@ async function getStream ({file, isTTY}) {
 
 	let packageLockPath = "package-lock.json"
 
-	let packageLockExists = await checkPathIsRegularFile(packageLockPath)
+	let packageLockExists = await checkPathIsReadableFile(packageLockPath)
 
 	if (!file && isTTY && packageLockExists) {
 		return createReadStream(packageLockPath)
