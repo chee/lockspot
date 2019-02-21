@@ -1,5 +1,8 @@
 # lockspot changes
 
+## 0.0.6
+* this update comes with an updated readme and also all the files required to use the program
+
 ## 0.0.5
 
 * yeet, we try to use a `package-lock.json` in cwd if there is one
