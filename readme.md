@@ -29,7 +29,11 @@ $ lockspot depcount < package.json
 
 ##### --file=\<path>
 the package-lock.json to operate on.
-you can use `-` or leave this blank to accept input on STDIN
+it tries to do the right thing if you leave this blank:
+• if you're piping something in on `STDIN`, it'll use that
+• if there's a package-lock in the dir, it'll use that
+• fall back to `STDIN`
+you can use `-` to force consuming `STDIN`
 
 #### --min=\<int>
 only print dependencies that have more than this number of versions.
