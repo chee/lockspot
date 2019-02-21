@@ -3,9 +3,16 @@ import fastclone from "fast-clone"
 
 export let initial = {}
 
-export let createReducer = ({production = false} = {}) =>
+export let createReducer = (options = {}) =>
 	function reducer (current, name, info) {
+		let {
+			production = false,
+			pattern
+		} = options
 		if (production && info.dev) {
+			return current
+		}
+		if (pattern && !pattern.exec(name)) {
 			return current
 		}
 		let counts = fastclone(current)
@@ -13,5 +20,6 @@ export let createReducer = ({production = false} = {}) =>
 		return counts
 	}
 
-let recursor = ({production}) => createRecursor(createReducer({production}), initial)
+let recursor = options => createRecursor(createReducer(options), initial)
+
 export default recursor
