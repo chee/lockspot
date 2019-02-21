@@ -20,6 +20,12 @@ export let builder = yargs => {
 			choices: ["dont", "count", "name"],
 			describe: "how to sort the dependencies"
 		})
+		.options("production", {
+			alias: ["prod", "p"],
+			type: "boolean",
+			default: "false",
+			describe: "only count the production (non-dev) tree"
+		})
 		.options("show")
 		.check(argv => {
 			if (!(Number.isInteger(argv.min) && argv.min >= 0)) {
@@ -47,7 +53,7 @@ let minFilter = min => ([, count]) =>
 export async function handler (argv) {
 	let lockfile = await getLockfile(argv)
 
-	let versions = await gatherDependencyVersions()(lockfile.dependencies)
+	let versions = await gatherDependencyVersions(argv)(lockfile.dependencies)
 	let longestName = await getLongestName()(lockfile.dependencies)
 
 	Object.entries(versions)
