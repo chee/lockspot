@@ -13,21 +13,9 @@ some statistics about your package-lock.json
 $ npm install -g lockspot
 ```
 
-## commands
+## universal options
 
-### depcount
-
-print the number of version of each dependency in the tree
-
-#### usage
-
-```sh
-$ lockspot depcount < package.json
-```
-
-#### options
-
-##### --file=\<path>
+### --file=\<path>
 the package-lock.json to operate on.
 it tries to do the right thing if you leave this blank:
 • if you're piping something in on `STDIN`, it'll use that
@@ -35,8 +23,51 @@ it tries to do the right thing if you leave this blank:
 • fall back to `STDIN`
 you can use `-` to force consuming `STDIN`
 
-#### --min=\<int>
-only print dependencies that have more than this number of versions.
+## commands
 
-#### --sort=\<dont|count|name>
+### depcount
+
+count the number of different versions of each dependency in the tree
+
+#### usage
+
+```sh
+$ <package-lock.json lockspot depcount 
+```
+
+#### options
+
+##### --min=\<int>
+only print dependencies that have more than this number of versions in the tree
+
+##### --prod
+only count production (non-dev) dependencies
+
+##### --pattern=\<pattern>
+only count dependencies whose names match this pattern
+
+##### --sort=\<dont|count|name>
 how to sort the dependencies. `dont` is the default.
+
+### flat
+
+exit with a failure if the tree is not flat
+
+#### usage
+
+```sh
+$ <package-lock.json lockspot flat
+```
+
+#### options
+
+##### --prod
+only count production (non-dev) dependencies
+
+##### --pattern=\<pattern>
+only count dependencies whose names match this pattern
+
+<!--
+##### --origami
+set `production` to `true`, and `pattern` to `/@financial-times\/o-.*/`.
+-->
