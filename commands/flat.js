@@ -38,5 +38,5 @@ export async function handler (argv) {
 		[symbols.internal]: true
 	})
 
-	process.exit(counts.length)
+		process.exit(counts.length && 4)
 }
