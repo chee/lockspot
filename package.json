@@ -10,7 +10,7 @@
 	"bin": "esmboot.js",
 	"keywords": [],
 	"author": "chee <chee@snoot.club>",
-	"license": "GPL-3.0+",
+	"license": "CC0-1.0",
 	"files": [
 		"commands/",
 		"functions/",
