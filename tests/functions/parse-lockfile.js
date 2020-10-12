@@ -34,7 +34,27 @@ describe("functions/parse-lockfile", () => {
 			name: "lil-yeet",
 			lockfileVersion: 1,
 			requires: true,
-			dependencies: {}
+			dependencies: {},
+		})
+	})
+
+	it("likes a v2 lockfile", async () => {
+		let exit = sinon.stub(process, "exit")
+		expect(exit.called).toBe(false)
+		let lockfile = await parseLockfile(`
+			{
+				"name": "lil-yeet",
+				"lockfileVersion": 2,
+				"requires": true,
+				"dependencies": {}
+			}
+		`)
+		expect(exit.called).toBe(false)
+		expect(lockfile).toEqual({
+			name: "lil-yeet",
+			lockfileVersion: 2,
+			requires: true,
+			dependencies: {},
 		})
 	})
 })

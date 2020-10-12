@@ -7,7 +7,9 @@
 	"scripts": {
 		"test": "mocha -r esm --recursive tests"
 	},
-	"bin": "esmboot.js",
+	"bin": {
+		"lockspot": "esmboot.js"
+	},
 	"keywords": [],
 	"author": "chee <chee@snoot.club>",
 	"license": "CC0-1.0",
